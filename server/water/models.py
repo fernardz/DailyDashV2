@@ -1,7 +1,6 @@
-from ..db import Base
+from ..db.base_class import Base
 from sqlalchemy import Boolean, Column, ForeignKey, Date, Integer, String
 from sqlalchemy.orm import relationship
-
 
 class Water(Base):
     __tablename__ = "water"

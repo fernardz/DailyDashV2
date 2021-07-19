@@ -3,7 +3,7 @@ from typing import Optional, List
 
 from . import schemas, crud
 from sqlalchemy.orm import Session
-from ..db import get_db
+from ..dependencies import get_db
 
 
 router = APIRouter(

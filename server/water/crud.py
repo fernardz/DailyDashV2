@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from . import models, schemas
-from ..db import get_db
+from ..dependencies import get_db
 
 ##### Water CRUD
 def get_waters(db: Session, skip: int = 0, limit: int = 100):

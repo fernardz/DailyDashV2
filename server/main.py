@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI
+from .db import Base
 
 app = FastAPI()
 

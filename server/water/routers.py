@@ -5,6 +5,8 @@ from . import schemas, crud
 from sqlalchemy.orm import Session
 from ..dependencies import get_db
 
+from fastapi.encoders import jsonable_encoder
+
 
 router = APIRouter(
     prefix="/water",

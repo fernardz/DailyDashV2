@@ -5,7 +5,7 @@ from ..dependencies import get_db
 
 ####--------------TASKS-----------###
 
-
+"""
 def create_task(db: Session, task: schemas.TaskCreate):
     db_task = models.Task(**task.dict())
     db.add(db_task)
@@ -21,5 +21,5 @@ def create_task_record(db: Session,
     db.commit()
     db.refresh(db_record)
     return db_record
-
+"""
 

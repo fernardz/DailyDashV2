@@ -37,6 +37,17 @@ def read_current_water_goal(db: Session = Depends(get_db)):
 def get_day_sum(date_id: date, db: Session =Depends(get_db)):
     water=db.query(models.Water).filter(models.Water.date==date_id)
     ws=water.with_entities(func.sum(models.Water.size)).scalar()
-    return jsonable_encoder({'sum':ws})
+    if ws is None:
+        return jsonable_encoder({'sum': 0})
+    else:
+        return jsonable_encoder({'sum': ws})
 
+@water_router.get("/current_results/")
+def get_current_sum(db: Session=Depends(get_db)):
+    water = db.query(models.Water).filter(models.Water.date == date.today())
+    ws = water.with_entities(func.sum(models.Water.size)).scalar()
+    if ws is None:
+        return jsonable_encoder({'sum':0})
+    else:
+        return jsonable_encoder({'sum': ws})
     

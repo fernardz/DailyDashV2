@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Ping from '../components/Ping.vue';
 import Water from '../components/Water.vue';
+import Vitamin from '../components/Vitamin.vue';
 import Dashboard from '../views/Dashboard.vue';
 
 Vue.use(VueRouter);
@@ -30,6 +31,11 @@ const routes = [
     path: '/water',
     name: 'Water',
     component: Water,
+  },
+  {
+    path: '/vitamin',
+    name: 'Vitamin',
+    component: Vitamin,
   },
   {
     path: '/dashboard',

@@ -1,5 +1,5 @@
 from ..db.base_class import Base
-from sqlalchemy import Boolean, Column, ForeignKey, Date, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Date, Integer, String, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 class Task(Base):
@@ -20,5 +20,6 @@ class TaskRecord(Base):
     date = Column(Date, index=True)
     status = Column(Boolean, nullable=False, default=False)
     task_id = Column(Integer, ForeignKey("tasks.id"))
-
     task = relationship("Task", back_populates="records")
+    __table_args__ = (UniqueConstraint('date', 'task_id', name='_only_one_a_day'),
+                  )

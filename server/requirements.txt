@@ -1,3 +1,4 @@
 fastapi
 uvicorn
 fastapi-crudrouter
+psycopg2

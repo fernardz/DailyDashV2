@@ -11,15 +11,13 @@ from pydantic import BaseModel
 class TaskRBase(BaseModel):
     date: date
     status: bool
+    task_id: int
 
 
 class TaskRecord(TaskRBase):
     id: int
-    task_id: int
-
     class Config:
         orm_mode = True
-
 
 class TaskRecordCreate(TaskRBase):
     pass
@@ -44,3 +42,4 @@ class Task(TaskBase):
 
     class Config:
         orm_mode = True
+

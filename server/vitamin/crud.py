@@ -27,7 +27,6 @@ def create_vitamin(db: Session, vit: schemas.VitaminCreate):
     db.refresh(db_vit)
     return db_vit
 
-
 def create_vitamin_record(db: Session,
                           vit_rec: schemas.VitaminRecordCreate, vit_id: id):
     db_record = models.VitaminRecord(**vit_rec.dict(), vitamin_id=vit_id)

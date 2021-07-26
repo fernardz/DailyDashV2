@@ -18,13 +18,11 @@ router = APIRouter(
 @router.post("/", response_model=schemas.Vitamin)
 def create_vitamin(vit: schemas.VitaminCreate, db: Session = Depends(get_db)):
     return crud.create_vitamin(db=db, vit=vit)
-
-
+    
 @router.get("/", response_model=List[schemas.Vitamin])
 def read_vitamins(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     vitamins = crud.get_vitamins(db, skip=skip, limit=limit)
     return vitamins
-
 
 @router.get("/{vit_id}", response_model=schemas.Vitamin)
 def read_vitamin(vit_id: int, db: Session = Depends(get_db)):

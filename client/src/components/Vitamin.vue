@@ -25,9 +25,14 @@
                 <tbody>
                     <tr v-for="(vitamin, index) in vitamins" :key="index">
                         <td>{{vitamin.name}}</td>
-                        <td>{{vitamin.name}}</td>
+                        <template v-if="vitamin.goals.length>0">
+                          <td>{{vitamin.goals[0].qty}}</td>
+                        </template>
+                        <template v-else>
+                          <td>No Goal Set</td>
+                        </template>
                         <td><button type="button" class="btn btn-danger btn-sm"
-                        >Delete</button></td>
+                        @click="onDeleteVitamin(vitamin)">Delete</button></td>
                     </tr>
 
                 </tbody>
@@ -39,11 +44,11 @@
           id="vitamin-modal"
           title="Add a new water record"
           hide-footer>
-    <b-form class="w-100">
-    <b-form-group id="form-date-group"
+    <b-form @submit="onSubmitVitamin" @reset="onResetVitamin" class="w-100">
+    <b-form-group id="form-v-group"
                   label="Name:"
-                  label-for="form-date-input">
-        <b-form-input id="form-date-input"
+                  label-for="form-v-input">
+        <b-form-input id="form-v-input"
                       type="string"
                       v-model="addVitaminForm.name"
                       required
@@ -95,6 +100,51 @@ export default {
           // eslint-disable-next-line
           console.error(error);
         });
+    },
+    removeVitamin(vitID) {
+      const path = `http://localhost:8000/vitamins/${vitID}`;
+      axios.delete(path)
+        .then(() => {
+          this.getVitamins();
+          this.message = 'Vitamin Deleted!';
+          this.showMessage = true;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+          this.getVitamins();
+        });
+    },
+    addVitamins(payload) {
+      const path = 'http://localhost:8000/vitamins/';
+      axios.post(path, payload)
+        .then(() => {
+          this.getVitamins();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.log(error);
+        });
+    },
+    onDeleteVitamin(vitamin) {
+      this.removeVitamin(vitamin.id);
+    },
+    initVForm() {
+      this.addVitamins.name = '';
+    },
+    onSubmitVitamin(evt) {
+      evt.preventDefault();
+      this.$refs.addVitaminModal.hide();
+      const payload = {
+        name: this.addVitaminForm.name,
+      };
+      this.addVitamins(payload);
+      this.initVitForm();
+    },
+    onResetVitamin(evt) {
+      evt.preventDefault();
+      this.$refs.addVitaminModal.hide();
+      this.initVForm();
     },
   },
   created() {

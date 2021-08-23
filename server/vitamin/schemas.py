@@ -1,3 +1,4 @@
+from server.db.base_class import Base
 from typing import List, Optional
 from uuid import UUID
 from datetime import date
@@ -63,3 +64,9 @@ class Vitamin(VitaminBase):
 
     class Config:
         orm_mode = True
+
+class VitaminSummary(BaseModel):
+    vitamin_id: int
+    name: str
+    goal: Optional[int]
+    amount: Optional[int]

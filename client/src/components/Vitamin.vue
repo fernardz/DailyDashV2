@@ -174,7 +174,7 @@ export default {
 
   methods: {
     getVitamins() {
-      const path = 'http://localhost:8000/vitamins/';
+      const path = 'http://192.168.1.181:8000/vitamins/';
       axios.get(path)
         .then((res) => {
           this.vitamins = res.data;
@@ -185,7 +185,7 @@ export default {
         });
     },
     removeVitamin(vitID) {
-      const path = `http://localhost:8000/vitamins/${vitID}`;
+      const path = `http://192.168.1.181:8000/vitamins/${vitID}`;
       axios.delete(path)
         .then(() => {
           this.getVitamins();
@@ -199,7 +199,7 @@ export default {
         });
     },
     removeRecord(vitID) {
-      const path = `http://localhost:8000/vitamins/record/${vitID}`;
+      const path = `http://192.168.1.181:8000/vitamins/record/${vitID}`;
       axios.delete(path)
         .then(() => {
           this.getVitamins();
@@ -213,7 +213,7 @@ export default {
         });
     },
     addVitamins(payload) {
-      const path = 'http://localhost:8000/vitamins/';
+      const path = 'http://192.168.1.181:8000/vitamins/';
       axios.post(path, payload)
         .then(() => {
           this.getVitamins();
@@ -224,7 +224,7 @@ export default {
         });
     },
     addVitaminGoal(vid, payload) {
-      const path = `http://localhost:8000/vitamins/goal/?vit_id=${vid}`;
+      const path = `http://192.168.1.181:8000/vitamins/goal/?vit_id=${vid}`;
       axios.post(path, payload)
         .then(() => {
           this.getVitamins();
@@ -235,7 +235,7 @@ export default {
         });
     },
     addVitaminRecord(vid, payload) {
-      const path = `http://localhost:8000/vitamins/record/?vit_id=${vid}`;
+      const path = `http://192.168.1.181:8000/vitamins/record/?vit_id=${vid}`;
       axios.post(path, payload)
         .then(() => {
           this.getVitamins();

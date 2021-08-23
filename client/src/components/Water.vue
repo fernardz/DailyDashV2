@@ -99,7 +99,7 @@ export default {
 
   methods: {
     getWaters() {
-      const path = 'http://localhost:8000/water';
+      const path = 'http://192.168.1.181:8000/water';
       axios.get(path)
         .then((res) => {
           this.waters = res.data;
@@ -110,7 +110,7 @@ export default {
         });
     },
     getCurrent() {
-      const path = `http://localhost:8000/water/get_day_results/${this.getCurrentDate()}`;
+      const path = `http://192.168.1.181:8000/water/get_day_results/${this.getCurrentDate()}`;
       axios.get(path)
         .then((res) => {
           this.current = res.data;
@@ -121,7 +121,7 @@ export default {
         });
     },
     getCurrentGoal() {
-      const path = 'http://localhost:8000/water_goal/current/';
+      const path = 'http://192.168.1.181:8000/water_goal/current/';
       axios.get(path)
         .then((res) => {
           // eslint-disable-next-line
@@ -134,7 +134,7 @@ export default {
         });
     },
     removeWater(waterID) {
-      const path = `http://localhost:8000/water/${waterID}`;
+      const path = `http://192.168.1.181:8000/water/${waterID}`;
       axios.delete(path)
         .then(() => {
           this.getWaters();
@@ -149,7 +149,7 @@ export default {
         });
     },
     addWater(payload) {
-      const path = 'http://localhost:8000/water';
+      const path = 'http://192.168.1.181:8000/water';
       axios.post(path, payload)
         .then(() => {
           this.getWaters();

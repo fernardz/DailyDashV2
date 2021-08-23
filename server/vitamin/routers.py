@@ -1,9 +1,12 @@
+from server.vitamin import models
 from fastapi import APIRouter, HTTPException, Depends
 from typing import List
 
 from . import schemas, crud
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from ..dependencies import get_db
+from datetime import date
 
 
 router = APIRouter(
@@ -23,6 +26,33 @@ def create_vitamin(vit: schemas.VitaminCreate, db: Session = Depends(get_db)):
 def read_vitamins(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     vitamins = crud.get_vitamins(db, skip=skip, limit=limit)
     return vitamins
+
+@router.get("/summary/{cur_date}", response_model=List[schemas.VitaminSummary])
+def read_summary(cur_date: date, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    cgoal = db.query(models.Vitamin_Goal,
+                    func.rank().over(
+                        order_by=models.Vitamin_Goal.date.desc(),
+                        partition_by=models.Vitamin_Goal.vitamin_id
+                    ).label('rnk')
+                    ).subquery()
+
+    summ = db.query(models.Vitamin, func.sum(models.VitaminRecord.qty).label('totals'))\
+        .join(models.VitaminRecord).filter(models.VitaminRecord.date == cur_date)\
+        .group_by(models.Vitamin.id).subquery()
+
+    res = db.query(models.Vitamin.id, models.Vitamin.name, summ.c.totals, cgoal.c.qty)\
+        .outerjoin(summ, models.Vitamin.id == summ.c.id)\
+        .outerjoin(cgoal, models.Vitamin.id == cgoal.c.vitamin_id).\
+        filter(cgoal.c.rnk == 1).distinct()
+    
+    results=[]
+    for r in res:
+        payload={"vitamin_id": r.id,
+        "name":r.name,
+        "goal":r.qty,
+        "amount":r.totals}
+        results.append(payload)
+    return results
 
 @router.get("/{vit_id}", response_model=schemas.Vitamin)
 def read_vitamin(vit_id: int, db: Session = Depends(get_db)):

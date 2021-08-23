@@ -51,7 +51,7 @@ export default {
 
   methods: {
     getActs() {
-      const path = 'http://localhost:8000/strava';
+      const path = 'http://192.168.1.181:8000/strava';
       axios.get(path)
         .then((res) => {
           this.acts = res.data;

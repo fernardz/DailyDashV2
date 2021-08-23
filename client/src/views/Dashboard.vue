@@ -36,7 +36,7 @@
 
 <script>
 // @ is an alias to /src
-import Water from '@/components/Water.vue';
+import Water from '@/components/water/Water_Progress.vue';
 import Vitamin from '@/components/Vitamin.vue';
 import Strava from '@/components/Strava.vue';
 // eslint-disable-next-line

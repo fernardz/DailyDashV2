@@ -4,6 +4,8 @@
           <div class="col-sm-10">
               <h1> Water Consumption </h1>
               <hr><br><br>
+              <b-progress :value="current_water.sum"
+              :max="current_water_goal.size" show-progress animated></b-progress>
               <alert :message=message v-if="showMessage"></alert>
               <button type="button" class="btn btn-success btn-sm" v-b-modal.water-modal>
                 Add Record
@@ -114,7 +116,7 @@ export default {
       const path = `http://192.168.1.181:8000/water/get_day_results/${this.getCurrentDate()}`;
       axios.get(path)
         .then((res) => {
-          this.current = res.data;
+          this.current_water = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -127,7 +129,7 @@ export default {
         .then((res) => {
           // eslint-disable-next-line
           console.log(res.data);
-          this.current_goal = res.data;
+          this.current_water_goal = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line

@@ -39,6 +39,25 @@
                 </tbody>
               </table>
               <hr>
+            <h3> Todays Vitamins </h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Vitamin</th>
+                        <th scope="col">Goal</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+            <tbody>
+              <tr v-for="(s, index) in vsummary" :key="index">
+              <td>{{s.name}}</td>
+              <td>{{s.goal}}</td>
+              <td>{{s.amount}}</td>
+              </tr>
+            </tbody>
+            </table>
+            <hr>
+            <h3> All Records </h3>
               <table class="table table-hover">
                 <thead>
                     <tr>
@@ -161,6 +180,7 @@ export default {
         qty: '',
       },
       vitamins: [],
+      vsummary: [],
       current: 0,
       current_goal: 0,
       message: '',
@@ -178,6 +198,17 @@ export default {
       axios.get(path)
         .then((res) => {
           this.vitamins = res.data;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+    },
+    getVitaminSummary() {
+      const path = `http://192.168.1.181:8000/vitamins/summary/${this.getCurrentDate()}`;
+      axios.get(path)
+        .then((res) => {
+          this.vsummary = res.data;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -316,6 +347,7 @@ export default {
   },
   created() {
     this.getVitamins();
+    this.getVitaminSummary();
   },
 };
 </script>

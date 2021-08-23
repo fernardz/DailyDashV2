@@ -10,11 +10,12 @@
               </button>
               <br><br>
               <div>{{ getCurrentDate() }}</div>
-              <template v-if="current_goal">
-                <h3>Current Water Consumption: {{current.sum}} - {{current_goal.size}}</h3>
+              <template v-if="current_water_goal">
+                <h3>Current Water Consumption:
+                   {{current_water.sum}} - {{current_water_goal.size}}</h3>
               </template>
               <template v-else>
-                <h3>Current Water Consumption: {{current.sum}} / NO GOAL</h3>
+                <h3>Current Water Consumption: {{current_water.sum}} / NO GOAL</h3>
               </template>
               <br><br>
               <table class="table table-hover">
@@ -86,8 +87,8 @@ export default {
         size: '',
       },
       waters: [],
-      current: 0,
-      current_goal: 0,
+      current_water: 0,
+      current_water_goal: 0,
       message: '',
       showMessage: false,
     };

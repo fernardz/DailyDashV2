@@ -4,7 +4,6 @@
           <div class="col-sm-10">
               <h1> Water Consumption </h1>
               <hr><br><br>
-              <tools></tools>
               <alert :message=message v-if="showMessage"></alert>
               <button type="button" class="btn btn-success btn-sm" v-b-modal.water-modal>
                 Add Record
@@ -96,7 +95,6 @@ export default {
 
   components: {
     alert: Alert,
-    tools: Tools,
   },
 
   methods: {

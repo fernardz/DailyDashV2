@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
+      <router-link to="/dashboard">Dashboard</router-link> |
       <router-link to="/water">Water</router-link> |
+      <router-link to="/vitamin">Vitamin</router-link> |
+      <router-link to="/strava">Strava</router-link> |
+      <router-link to="/task">Task</router-link>
+
     </div>
     <router-view/>
   </div>

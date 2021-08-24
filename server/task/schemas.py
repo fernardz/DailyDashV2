@@ -43,3 +43,8 @@ class Task(TaskBase):
     class Config:
         orm_mode = True
 
+class DailyTask(BaseModel):
+    id: int
+    date: date
+    status: bool
+    desc: str

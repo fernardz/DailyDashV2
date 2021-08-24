@@ -16,6 +16,7 @@ const state = {
   water_goal: 0,
   waters: [],
   vitamin_summary: [],
+  tasks_day: [],
 };
 
 const getters = {};
@@ -67,6 +68,19 @@ const actions = {
         console.error(error);
       });
   },
+
+  // task calls
+  getDailyTasks({ commit }) {
+    const path = `http://192.168.1.181:8000/task_record/day/${getCurrentDate()}`;
+    axios.get(path)
+      .then((res) => {
+        commit('SET_TASK_DAY', res.data);
+      })
+      .catch((error) => {
+      // eslint-disable-next-line
+      console.error(error);
+      });
+  },
 };
 
 const mutations = {
@@ -81,6 +95,9 @@ const mutations = {
   },
   SET_VIT_SUMM(state, VSumm) {
     state.vitamin_summary = VSumm;
+  },
+  SET_TASK_DAY(state, TDay) {
+    state.tasks_day = TDay;
   },
 };
 

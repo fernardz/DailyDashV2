@@ -15,6 +15,7 @@ const state = {
   current_water: 0,
   water_goal: 0,
   waters: [],
+  vitamin_summary: [],
 };
 
 const getters = {};
@@ -53,6 +54,19 @@ const actions = {
         console.error(error);
       });
   },
+  // vitamin calls
+
+  getCurrentVitamins({ commit }) {
+    const path = `http://192.168.1.181:8000/vitamins/summary/${getCurrentDate()}`;
+    axios.get(path)
+      .then((res) => {
+        commit('SET_VIT_SUMM', res.data);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.error(error);
+      });
+  },
 };
 
 const mutations = {
@@ -64,6 +78,9 @@ const mutations = {
   },
   SET_WATERS(state, Waters) {
     state.waters = Waters;
+  },
+  SET_VIT_SUMM(state, VSumm) {
+    state.vitamin_summary = VSumm;
   },
 };
 

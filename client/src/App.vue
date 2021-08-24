@@ -6,7 +6,6 @@
       <router-link to="/vitamin">Vitamin</router-link> |
       <router-link to="/strava">Strava</router-link> |
       <router-link to="/task">Task</router-link>
-
     </div>
     <router-view/>
   </div>
@@ -18,11 +17,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 
 #nav {
-  padding: 30px;
+  padding: 10px;
 }
 
 #nav a {

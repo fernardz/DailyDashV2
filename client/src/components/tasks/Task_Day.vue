@@ -4,12 +4,14 @@
         <div class="col-sm-12" style="padding: 1px;">
           <template v-if="daily_task.status">
             <b-button pill size='s' class="w-100" variant="outline-success"
+            style="font-size: 0.8em;"
             @click="onTaskToggle(daily_task)">
               {{daily_task.desc}}
             </b-button>
           </template>
           <template v-else>
             <b-button pill size='s' class="w-100" variant="outline-danger"
+             style="font-size: 0.8em;"
             @click="onTaskToggle(daily_task)">
               {{daily_task.desc}}
             </b-button>
@@ -25,7 +27,9 @@ export default {
   name: 'TasksDaily',
   computed: {
     daily_tasks() {
-      return this.$store.state.tasks_day;
+      const res = this.$store.state.tasks_day;
+      // eslint-disable-next-line
+      return res.sort((a, b) => ((a.status > b.status) ? -1 : 1));
     },
   },
   methods: {

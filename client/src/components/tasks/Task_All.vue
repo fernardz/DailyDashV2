@@ -12,10 +12,10 @@
       </b-button-group>
     </div>
     <div>
-      <b-button size='s' variant="outline-success">
-        <b-icon-plus-circle>
-        </b-icon-plus-circle>
-      </b-button>
+    <b-button size='s' variant="outline-success">
+      <b-icon-plus-circle>
+      </b-icon-plus-circle>
+    </b-button>
     </div>
   </div>
   <hr>

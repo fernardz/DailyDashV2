@@ -78,7 +78,7 @@ const actions = {
       });
   },
   getVitamins({ commit }) {
-    const path = 'http://192.168.1.181:8000/vitamins';
+    const path = 'http://192.168.1.181:8000/vitamins/';
     axios.get(path)
       .then((res) => {
         commit('SET_VITS', res.data);

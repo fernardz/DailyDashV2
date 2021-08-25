@@ -10,7 +10,7 @@
           <div class="col-sm-8 pt-1">
             <b-progress height="2rem" :max="vitamin.goal">
               <b-progress-bar :value="vitamin.amount">
-                <span><strong>{{ vitamin.amount.toFixed(2) }} / {{ vitamin.goal }}
+                <span><strong>{{ vitamin.amount}} / {{ vitamin.goal }}
                 </strong></span>
               </b-progress-bar>
             </b-progress>

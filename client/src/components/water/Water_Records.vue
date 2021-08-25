@@ -29,7 +29,11 @@ import Tools from '@/components/mixins/Tools';
 export default {
   name: 'WaterRecords',
   mixins: [Tools],
-  props: ['waters'],
+  computed: {
+    waters() {
+      return this.$store.state.waters;
+    },
+  },
   data() {
     return {
       addWaterForm: {
@@ -57,8 +61,9 @@ export default {
       const path = 'http://192.168.1.181:8000/water';
       axios.post(path, payload)
         .then(() => {
-          this.getWaters();
-          this.getCurrent();
+          this.$store.dispatch('getWaters');
+          this.$store.dispatch('getCurrent');
+          this.$store.dispatch('getCurrentGoal');
         })
         .catch((error) => {
           // eslint-disable-next-line

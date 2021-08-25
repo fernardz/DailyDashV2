@@ -16,10 +16,19 @@ const state = {
   water_goal: 0,
   waters: [],
   vitamin_summary: [],
+  vitamins: [],
   tasks_day: [],
+  tasks: [],
+  task_records: [],
 };
 
-const getters = {};
+const getters = {
+// eslint-disable-next-line
+  getTaskRecordsById: (state) => (id) => {
+    // eslint-disable-next-line
+    return state.task_records.filter(task_record => task_record.task_id === id);
+  },
+};
 
 const actions = {
   getCurrent({ commit }) {
@@ -68,6 +77,17 @@ const actions = {
         console.error(error);
       });
   },
+  getVitamins({ commit }) {
+    const path = 'http://192.168.1.181:8000/vitamins';
+    axios.get(path)
+      .then((res) => {
+        commit('SET_VITS', res.data);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.error(error);
+      });
+  },
 
   // task calls
   getDailyTasks({ commit }) {
@@ -79,6 +99,28 @@ const actions = {
       .catch((error) => {
       // eslint-disable-next-line
       console.error(error);
+      });
+  },
+  getTasks({ commit }) {
+    const path = 'http://192.168.1.181:8000/task';
+    axios.get(path)
+      .then((res) => {
+        commit('SET_TASKS', res.data);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.error(error);
+      });
+  },
+  getTaskRecords({ commit }) {
+    const path = 'http://192.168.1.181:8000/task_record';
+    axios.get(path)
+      .then((res) => {
+        commit('SET_TASK_RECORDS', res.data);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.error(error);
       });
   },
 };
@@ -96,8 +138,17 @@ const mutations = {
   SET_VIT_SUMM(state, VSumm) {
     state.vitamin_summary = VSumm;
   },
+  SET_VITS(state, Vits) {
+    state.vitamins = Vits;
+  },
   SET_TASK_DAY(state, TDay) {
     state.tasks_day = TDay;
+  },
+  SET_TASKS(state, Tasks) {
+    state.tasks = Tasks;
+  },
+  SET_TASK_RECORDS(state, taskRecords) {
+    state.task_records = taskRecords;
   },
 };
 

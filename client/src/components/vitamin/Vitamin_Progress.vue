@@ -42,7 +42,11 @@ import Tools from '@/components/mixins/Tools';
 export default {
   name: 'VitaminProgress',
   mixins: [Tools],
-  props: ['vitamin_summary'],
+  computed: {
+    vitamin_summary() {
+      return this.$store.state.vitamin_summary;
+    },
+  },
   data() {
     return {
       addWaterForm: {
@@ -64,6 +68,7 @@ export default {
       axios.post(path, payload)
         .then(() => {
           this.$emit('clicked', true);
+          this.$store.dispatch('getCurrentVitamins');
         })
         .catch((error) => {
           // eslint-disable-next-line

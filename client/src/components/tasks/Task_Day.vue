@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="row" v-for="daily_task in daily_tasks" :key="daily_task.id">
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="padding: 1px;">
           <template v-if="daily_task.status">
             <b-button pill size='s' class="w-100" variant="outline-success"
             @click="onTaskToggle(daily_task)">
@@ -23,7 +23,11 @@ import axios from 'axios';
 
 export default {
   name: 'TasksDaily',
-  props: ['daily_tasks'],
+  computed: {
+    daily_tasks() {
+      return this.$store.state.tasks_day;
+    },
+  },
   methods: {
     onTaskToggle(task) {
       let tstatus;
@@ -44,12 +48,16 @@ export default {
       axios.put(path, payload)
         .then(() => {
           this.$emit('clicked', true);
+          this.$store.dispatch('getDailyTasks');
         })
         .catch((error) => {
           // eslint-disable-next-line
           console.log(error);
         });
     },
+  },
+  mounted() {
+    this.$store.dispatch('getDailyTasks');
   },
 };
 </script>

@@ -83,6 +83,9 @@ export default {
       axios.post(path, payload)
         .then(() => {
           this.$emit('clicked', true);
+          this.$store.dispatch('getWaters');
+          this.$store.dispatch('getCurrent');
+          this.$store.dispatch('getCurrentGoal');
         })
         .catch((error) => {
           // eslint-disable-next-line

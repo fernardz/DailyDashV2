@@ -2,36 +2,23 @@
   <div class="container">
       <div class="row">
           <div class="col-sm-12">
-            <vprogress :vitamin_summary=vitamin_summary @clicked="vcontrolClicked()">
-            </vprogress>
+            <vprogress></vprogress>
+            <hr>
+            <vall></vall>
           </div>
       </div>
-      <hr>
   </div>
 </template>
 
 <script>
 import VitaminProgress from '@/components/vitamin/Vitamin_Progress.vue';
+import VitAll from '@/components/vitamin/Vitamin_All.vue';
 
 export default {
   name: 'Vitamin',
-  data() {
-    return {
-      msg: 'Welcome to my Vuex Store',
-    };
-  },
-  computed: {
-    vitamin_summary() {
-      return this.$store.state.vitamin_summary;
-    },
-  },
   components: {
     vprogress: VitaminProgress,
-  },
-  methods: {
-    vcontrolClicked() {
-      this.$store.dispatch('getCurrentVitamins');
-    },
+    vall: VitAll,
   },
   mounted() {
     this.$store.dispatch('getCurrentVitamins');

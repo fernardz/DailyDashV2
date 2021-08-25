@@ -12,8 +12,11 @@
       <hr>
       <div class="row">
         <div class="col-sm-8" style="overflow-y: scroll; height: 180px">
-            <vprogress :vitamin_summary=vitamin_summary @clicked="vcontrolClicked()" >
+            <vprogress >
             </vprogress>
+        </div>
+        <div class="col-sm-4" style="overflow-y: scroll; height: 180px">
+            <tdaily></tdaily>
         </div>
       </div>
   </div>
@@ -26,6 +29,9 @@ import WaterControl from '@/components/water/Water_Control.vue';
 
 // Vitamin Module
 import VitaminProgress from '@/components/vitamin/Vitamin_Progress.vue';
+
+// Task Module
+import TaskDaily from '@/components/tasks/Task_Day.vue';
 
 export default {
   name: 'Dashboard',
@@ -49,6 +55,8 @@ export default {
     watercontrol: WaterControl,
     // vitamin section
     vprogress: VitaminProgress,
+    // task section
+    tdaily: TaskDaily,
   },
   methods: {
     watercontrolClicked() {

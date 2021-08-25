@@ -48,3 +48,4 @@ class DailyTask(BaseModel):
     date: date
     status: bool
     desc: str
+    task_id: str

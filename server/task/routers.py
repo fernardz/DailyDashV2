@@ -32,7 +32,8 @@ def get_day_tasks(tdate: date, db: Session=Depends(get_db)):
     tasks_day = db.query(models.TaskRecord).filter(
         models.TaskRecord.date == tdate ).subquery()
 
-    tasks = db.query(models.Task.desc, tasks_day.c.date, tasks_day.c.status, tasks_day.c.id)\
+    tasks = db.query(models.Task.id.label('task_id'),\
+        models.Task.desc, tasks_day.c.date, tasks_day.c.status, tasks_day.c.id)\
         .join(tasks_day, models.Task.id == tasks_day.c.task_id).all()
     
     print(tasks)

@@ -4,7 +4,7 @@
       <router-link to="/dashboard">Dashboard</router-link> |
       <router-link to="/water">Water</router-link> |
       <router-link to="/vitamin">Vitamin</router-link> |
-      <router-link to="/strava">Strava</router-link> |
+      <router-link to="/activity">Acitvity</router-link> |
       <router-link to="/task">Task</router-link>
     </div>
     <router-view/>

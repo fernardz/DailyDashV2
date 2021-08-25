@@ -20,8 +20,8 @@ const routes = [
     component: Vitamin,
   },
   {
-    path: '/strava',
-    name: 'Strava',
+    path: '/activity',
+    name: 'Activity',
     component: Strava,
   },
   {

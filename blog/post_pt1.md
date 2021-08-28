@@ -70,7 +70,7 @@ For each module we have the following:
 * `__init__.py`: imports all models and includes our routers.
 
 
-> Quick note: we define a `db` module. One will handel our session. But more importantly per the documentation of [FastAPI](fastapi.com). We need to declare a base at `base_class.py` and then import all our models from all modules into `base.py`.
+> Quick note: we define a `db` module. One will handel our session. But more importantly per the documentation of [FastAPI](https://fastapi.tiangolo.com/). We need to declare a base at `base_class.py` and then import all our models from all modules into `base.py`.
 >```python
 >#base.py
 >from server.db.base_class import Base
@@ -164,7 +164,7 @@ class WaterGoalCreate(WaterBase):
 ```
 
 ### routers.py
-Half of the appeal of using FastAPI or Flask is the amount of different modules that save you time. Since I dont want to define the same basic crud setup every single time we will use [fastapi_crudrouter](get ), to take of that part and add or overwrite the routes as we need.
+Half of the appeal of using FastAPI or Flask is the amount of different modules that save you time. Since I dont want to define the same basic crud setup every single time we will use [fastapi_crudrouter](https://github.com/awtkns/fastapi-crudrouter), to take of that part and add or overwrite the routes as we need.
 
 To add use crudrouter its pretty straight forward
 

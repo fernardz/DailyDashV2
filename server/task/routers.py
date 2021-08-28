@@ -22,6 +22,7 @@ task_record_router = SQLAlchemyCRUDRouter(
 task_router = SQLAlchemyCRUDRouter(
     schema=schemas.Task,
     create_schema=schemas.TaskCreate,
+    update_schema=schemas.TaskCreate,
     db_model=models.Task,
     db=get_db,
     prefix='task'
@@ -32,7 +33,7 @@ def get_day_tasks(tdate: date, db: Session=Depends(get_db)):
     tasks_day = db.query(models.TaskRecord).filter(
         models.TaskRecord.date == tdate ).subquery()
 
-    tasks = db.query(models.Task.id.label('task_id'),\
+    tasks = db.query(models.Task.id.label('task_id'),
         models.Task.desc, tasks_day.c.date, tasks_day.c.status, tasks_day.c.id)\
         .join(tasks_day, models.Task.id == tasks_day.c.task_id).all()
     

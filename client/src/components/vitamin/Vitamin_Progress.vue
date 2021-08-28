@@ -3,12 +3,12 @@
     <div class="row" v-for="vitamin in vitamin_summary" :key="vitamin.id">
       <template v-if="vitamin.goal && vitamin.amount">
           <div class="col-sm-4">
-            <b-button pill size='s'
+            <b-button pill size='s' style="font-size: 0.8em;"
             variant="outline-info" class="w-100" @click="onSubmitQuick(vitamin)">
               {{vitamin.name}}</b-button>
           </div>
           <div class="col-sm-8 pt-1">
-            <b-progress height="2rem" :max="vitamin.goal">
+            <b-progress height="1.5rem" :max="vitamin.goal">
               <b-progress-bar :value="vitamin.amount">
                 <span><strong>{{ vitamin.amount}} / {{ vitamin.goal }}
                 </strong></span>
@@ -18,12 +18,12 @@
         </template>
         <template v-else-if="vitamin.goal">
           <div class="col-sm-4">
-            <b-button pill size='s'
+            <b-button pill size='s' style="font-size: 0.8em;"
             variant="outline-info" class="w-100" @click="onSubmitQuick(vitamin)">
               {{vitamin.name}}</b-button>
           </div>
           <div class="col-sm-8 pt-1">
-            <b-progress height="2rem" :max="vitamin.goal">
+            <b-progress height="1.5rem" :max="vitamin.goal">
               <b-progress-bar :value=0>
                 <span><strong>0 / {{ vitamin.goal }}
                 </strong></span>

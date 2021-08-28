@@ -20,6 +20,7 @@ const state = {
   tasks_day: [],
   tasks: [],
   task_records: [],
+  act_sum: '',
 };
 
 const getters = {
@@ -123,6 +124,18 @@ const actions = {
         console.error(error);
       });
   },
+  // activity calls
+  getActSummary({ commit }) {
+    const path = `http://192.168.1.181:8000/strava/get_day_results/${getCurrentDate()}`;
+    axios.get(path)
+      .then((res) => {
+        commit('SET_ACT_SUM', res.data);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.error(error);
+      });
+  },
 };
 
 const mutations = {
@@ -149,6 +162,9 @@ const mutations = {
   },
   SET_TASK_RECORDS(state, taskRecords) {
     state.task_records = taskRecords;
+  },
+  SET_ACT_SUM(state, actSumm) {
+    state.act_sum = actSumm;
   },
 };
 

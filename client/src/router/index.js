@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Water from '../views/Water.vue';
 import Task from '../views/Task.vue';
-import Strava from '../components/Strava.vue';
 import Vitamin from '../views/Vitamin.vue';
+import Activity from '../views/Activity.vue';
 import Dashboard from '../views/Dashboard.vue';
 
 Vue.use(VueRouter);
@@ -20,14 +20,14 @@ const routes = [
     component: Vitamin,
   },
   {
-    path: '/activity',
-    name: 'Activity',
-    component: Strava,
-  },
-  {
     path: '/task',
     name: 'Task',
     component: Task,
+  },
+  {
+    path: '/activity',
+    name: 'Activity',
+    component: Activity,
   },
   {
     path: '/dashboard',

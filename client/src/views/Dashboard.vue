@@ -19,6 +19,12 @@
             <tdaily></tdaily>
         </div>
       </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-12">
+          <actdaily></actdaily>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -32,6 +38,9 @@ import VitaminProgress from '@/components/vitamin/Vitamin_Progress.vue';
 
 // Task Module
 import TaskDaily from '@/components/tasks/Task_Day.vue';
+
+// Activity Module
+import ActDaily from '@/components/activity/Activity_Day.vue';
 
 export default {
   name: 'Dashboard',
@@ -57,6 +66,8 @@ export default {
     vprogress: VitaminProgress,
     // task section
     tdaily: TaskDaily,
+    // activity section
+    actdaily: ActDaily,
   },
   methods: {
     watercontrolClicked() {

@@ -264,7 +264,7 @@ One of the nice features of FastAPI is it automatically generates documentation 
 
 If we go to http://127.0.0.1:8000/docs#/ we will see that page.
 
-![sample of doc](images/sample_s.png)
+![sample of doc](images/sample_s.PNG)
 
 Now we have a fully functionig API and can get to work on the front end.
 

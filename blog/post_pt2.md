@@ -431,7 +431,7 @@ export default {
 </script>
 ```
 Which gives me a nice dashboard that looks like this:
-![sample of dashboard](images/sample_dash.png)
+![sample of dashboard](images/sample_dash.PNG)
 
 ## Conclusion
 Obviously not every step of the front end or the api is discussed here, and I am sure that there are mistakes made specially with Vue since its not my forte. But its works well enough and it can be accessed on multiple devices on my home network, In my case I have it displayed on Raspberry PI mounted on top of my desk.

@@ -76,5 +76,9 @@ export default {
         });
     },
   },
+  mounted() {
+    // vitamin section
+    this.$store.dispatch('getCurrentVitamins');
+  },
 };
 </script>

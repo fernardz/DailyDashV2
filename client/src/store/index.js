@@ -33,7 +33,7 @@ const getters = {
 
 const actions = {
   getCurrent({ commit }) {
-    const path = `http://localhost:8000/water/get_day_results/${getCurrentDate()}`;
+    const path = `http://rasp-srv:8000/water/get_day_results/${getCurrentDate()}`;
     axios.get(path)
       .then((res) => {
         commit('SET_CURRENT_WATER', res.data);
@@ -44,7 +44,7 @@ const actions = {
       });
   },
   getWaters({ commit }) {
-    const path = 'http://localhost:8000/water';
+    const path = 'http://rasp-srv:8000/water';
     axios.get(path)
       .then((res) => {
         commit('SET_WATERS', res.data);
@@ -55,7 +55,7 @@ const actions = {
       });
   },
   getCurrentGoal({ commit }) {
-    const path = 'http://localhost:8000/water_goal/current/';
+    const path = 'http://rasp-srv:8000/water_goal/current/';
     axios.get(path)
       .then((res) => {
         commit('SET_WATER_GOAL', res.data);
@@ -68,7 +68,7 @@ const actions = {
   // vitamin calls
 
   getCurrentVitamins({ commit }) {
-    const path = `http://localhost:8000/vitamins/summary/${getCurrentDate()}`;
+    const path = `http://rasp-srv:8000/vitamins/summary/${getCurrentDate()}`;
     axios.get(path)
       .then((res) => {
         commit('SET_VIT_SUMM', res.data);
@@ -79,7 +79,7 @@ const actions = {
       });
   },
   getVitamins({ commit }) {
-    const path = 'http://localhost:8000/vitamins/';
+    const path = 'http://rasp-srv:8000/vitamins/';
     axios.get(path)
       .then((res) => {
         commit('SET_VITS', res.data);
@@ -92,7 +92,7 @@ const actions = {
 
   // task calls
   getDailyTasks({ commit }) {
-    const path = `http://localhost:8000/task_record/day/${getCurrentDate()}`;
+    const path = `http://rasp-srv:8000/task_record/day/${getCurrentDate()}`;
     axios.get(path)
       .then((res) => {
         commit('SET_TASK_DAY', res.data);
@@ -103,7 +103,7 @@ const actions = {
       });
   },
   getTasks({ commit }) {
-    const path = 'http://localhost:8000/task';
+    const path = 'http://rasp-srv:8000/task';
     axios.get(path)
       .then((res) => {
         commit('SET_TASKS', res.data);
@@ -114,7 +114,7 @@ const actions = {
       });
   },
   getTaskRecords({ commit }) {
-    const path = 'http://localhost:8000/task_record';
+    const path = 'http://rasp-srv:8000/task_record';
     axios.get(path)
       .then((res) => {
         commit('SET_TASK_RECORDS', res.data);
@@ -126,7 +126,7 @@ const actions = {
   },
   // activity calls
   getActSummary({ commit }) {
-    const path = `http://localhost:8000/strava/get_day_results/${getCurrentDate()}`;
+    const path = `http://rasp-srv:8000/strava/get_day_results/${getCurrentDate()}`;
     axios.get(path)
       .then((res) => {
         commit('SET_ACT_SUM', res.data);

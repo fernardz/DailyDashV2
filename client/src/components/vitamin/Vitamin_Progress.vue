@@ -64,7 +64,7 @@ export default {
       this.addVitaminRecord(vit.vitamin_id, payload);
     },
     addVitaminRecord(vid, payload) {
-      const path = `http://localhost:8000/vitamins/record/?vit_id=${vid}`;
+      const path = `http://rasp-srv:8000/vitamins/record/?vit_id=${vid}`;
       axios.post(path, payload)
         .then(() => {
           this.$emit('clicked', true);

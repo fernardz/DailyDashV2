@@ -48,7 +48,7 @@ export default {
       this.updateTaskRecord(task.id, payload);
     },
     updateTaskRecord(tid, payload) {
-      const path = `http://localhost:8000/task_record/${tid}`;
+      const path = `http://rasp-srv:8000/task_record/${tid}`;
       axios.put(path, payload)
         .then(() => {
           this.$emit('clicked', true);

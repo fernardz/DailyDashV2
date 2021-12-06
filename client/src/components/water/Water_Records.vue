@@ -58,7 +58,7 @@ export default {
       this.initForm();
     },
     addWater(payload) {
-      const path = 'http://localhost:8000/water';
+      const path = 'http://rasp-srv:8000/water';
       axios.post(path, payload)
         .then(() => {
           this.$store.dispatch('getWaters');
@@ -79,7 +79,7 @@ export default {
       this.removeWater(water.id);
     },
     removeWater(waterID) {
-      const path = `http://localhost:8000/water/${waterID}`;
+      const path = `http://rasp-srv:8000/water/${waterID}`;
       axios.delete(path)
         .then(() => {
           this.$store.dispatch('getWaters');

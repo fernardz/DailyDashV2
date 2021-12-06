@@ -120,7 +120,7 @@ export default {
       this.selVit = '';
     },
     removeVit(vid) {
-      const path = `http://localhost:8000/vitamins/${vid}`;
+      const path = `http://rasp-srv:8000/vitamins/${vid}`;
       axios.delete(path)
         .then(() => {
           this.$store.dispatch('getVitamins');
@@ -157,7 +157,7 @@ export default {
       this.initVitForm();
     },
     addVit(payload) {
-      const path = 'http://localhost:8000/vitamins/';
+      const path = 'http://rasp-srv:8000/vitamins/';
       axios.post(path, payload)
         .then(() => {
           this.$emit('clicked', true);
@@ -169,7 +169,7 @@ export default {
         });
     },
     addVitGoal(vid, payload) {
-      const path = `http://localhost:8000/vitamins/goal/?vit_id=${vid}`;
+      const path = `http://rasp-srv:8000/vitamins/goal/?vit_id=${vid}`;
       axios.post(path, payload)
         .then(() => {
           this.$emit('clicked', true);

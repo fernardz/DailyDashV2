@@ -79,7 +79,7 @@ export default {
       this.initForm();
     },
     addWater(payload) {
-      const path = 'http://192.168.1.181:8000/water';
+      const path = 'http://localhost:8000/water';
       axios.post(path, payload)
         .then(() => {
           this.$emit('clicked', true);

@@ -5,7 +5,7 @@ import os
 
 #SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 #SQLALCHEMY_DATABASE_URL = "postgresql://dailydash:yourpass@localhost/betterment"
-SQLALCHEMY_DATABASE_URL = os.get_env('DD_DB_HOST')
+SQLALCHEMY_DATABASE_URL = os.getenv('DD_DB_HOST')
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL

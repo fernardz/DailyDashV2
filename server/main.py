@@ -12,12 +12,16 @@ origins = [
     "http://localhost:8081",
     "http://192.168.1.181:8081",
     "http://192.168.1.181:8080",
-    "http://192.168.1.181:8000"
+    "http://192.168.1.181:8000",
+    "http://192.168.1.232",
+    "//rasp-srv",
 ]
+
+origins_all = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=origins_all,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -2,3 +2,4 @@ fastapi
 uvicorn
 fastapi-crudrouter
 psycopg2
+alembic

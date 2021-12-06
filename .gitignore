@@ -148,3 +148,4 @@ __azurite*
 garbage
 colum_sizes.csv
 cli.py
+*.service

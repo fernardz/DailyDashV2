@@ -5,7 +5,7 @@ from sqlalchemy import Boolean, Column, Float, Date, Integer, String, DateTime
 
 class StravaActivity (Base):
     __tablename__="strava_activity"
-    id=Column(Integer, primary_key=True, index=True)
+    id=Column(BigInteger, primary_key=True, index=True)
     name=Column(String(100), nullable=False)
     type=Column(String(50), nullable=False)
     start_date=Column(DateTime, nullable=False)

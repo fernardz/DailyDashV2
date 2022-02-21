@@ -47,18 +47,7 @@ bucket_name = 'test2'
 host = 'http://localhost:9000'
 filename = 'test3.json'
 
-# Handle DB Connections
-SQLALCHEMY_DATABASE_URL = os.getenv('DD_DB_HOST')
-print(SQLALCHEMY_DATABASE_URL)
 
-Base = automap_base()
-
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL
-)
-Base.prepare(engine, reflect=True)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-session = SessionLocal()
 
 
 def get_data_from_s3(bucket_name, host, filename):
@@ -89,10 +78,19 @@ def get_data_from_s3(bucket_name, host, filename):
             raise
         return data
 
+def export_data_to_db(data):
 
-if __name__ == "__main__":
-    data = get_data_from_s3(bucket_name, host, filename)
+    # Handle DB Connections
+    SQLALCHEMY_DATABASE_URL = os.getenv('DD_DB_HOST')
 
+    Base = automap_base()
+
+    engine = create_engine(
+        SQLALCHEMY_DATABASE_URL
+    )
+    Base.prepare(engine, reflect=True)
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    
     @contextmanager
     def get_db():
         db = SessionLocal()
@@ -114,3 +112,9 @@ if __name__ == "__main__":
             stmnt = stmnt.on_conflict_do_update(
                 index_elements=['id'], set_=ST_up.dict())
             db.execute(stmnt)
+
+
+
+if __name__ == "__main__":
+    data = get_data_from_s3(bucket_name, host, filename)
+    export_data_to_db(data)

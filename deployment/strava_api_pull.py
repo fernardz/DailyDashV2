@@ -74,6 +74,7 @@ try:
                            auto_refresh_url=refresh_url,
                            token_updater=token_saver)
     response = client.get(activities_url)
+    logging.info(response)
     if response.status_code != 200:
         logging.error('FAILED API CALL TO API')
         raise ConnectionError

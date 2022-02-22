@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -26,14 +26,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from .water import create_module as water_create
-from .vitamin import create_module as vitamin_create
-from .task import create_module as task_create
-from .strava import create_module as strava_create
+from .water import create_module as water_create  # noqa: E402
+from .vitamin import create_module as vitamin_create  # noqa: E402
+from .task import create_module as task_create  # noqa: E402
+from .strava import create_module as strava_create  # noqa: E402
 
 water_create(app)
 vitamin_create(app)
 task_create(app)
 strava_create(app)
-
-

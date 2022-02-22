@@ -1,8 +1,6 @@
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from server import task
-
 app = FastAPI()
 
 origins = [

@@ -35,7 +35,7 @@ volumes:
 Now if we do `docker-compose up` we will spin up a container with _Minio_.
 The dashboard will be accessible at [localhost:9000](localhost:9000). We just use the default Access Key and Secret to login
 
-![minio_dashboard](/imgs/minio_browser.PNG)
+![minio_dashboard](imgs/minio_browser.PNG)
 
 ### Extending our Airflow Image
 
@@ -79,7 +79,7 @@ We just use the default user (if using docker-compose) for me this is the super 
 On the admin dashboard we are going to setup our Strava API keys.
 > Airflow will treat anything ending in _SECRET as a password and block accordingly.
  
-![airflow_variable](airflow/imgs/airflow_variable.PNG)
+![airflow_variable](imgs/airflow_variable.PNG)
 
 We follow the same process to setup our STRAVA_CLIENT_SECRET.
 Withing our airflow dag declaration these can be accessed with the `airflow.models` module.
@@ -435,10 +435,10 @@ strava_task_dag = strava_data_pipeline()
 
 If we log into our Airflow Dashboard we will see our new dag (which we saved into our dag folder).
 
-![airflow-strava-dag](imgs/strava_dag.PNG)
+![airflow-strava-dag](/imgs/strava_dag.PNG)
 
 We can trigger our dag to see if it works. We will see both tasks status.
 
-![dag-result](imgs/dag_result.PNG)
+![dag-result](/imgs/dag_result.PNG)
 
 The whole setup can be accessed on my [github](https://github.com/frodrig3ND/DailyDashV2/tree/master/deployment)

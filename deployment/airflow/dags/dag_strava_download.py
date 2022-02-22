@@ -1,6 +1,4 @@
 # Hooks
-from pydoc import ModuleScanner
-from fastapi import Response
 from airflow.providers.redis.hooks.redis import RedisHook
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from airflow.hooks.postgres_hook import PostgresHook

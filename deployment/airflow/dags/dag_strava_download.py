@@ -24,6 +24,8 @@ from requests.models import Response as Request_Response
 import logging
 # Defining the dag to pull data from an api and upload
 # to s3 bucket
+
+
 def _get_strava_data(**_) -> Request_Response:
     """
     Download data from strava api and return data

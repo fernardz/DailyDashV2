@@ -1,8 +1,10 @@
 # Hooks
+from pydoc import ModuleScanner
+from fastapi import Response
 from airflow.providers.redis.hooks.redis import RedisHook
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from airflow.hooks.postgres_hook import PostgresHook
-# Utlility
+# Utility
 from airflow.decorators import task, dag
 from airflow.operators.python import get_current_context
 from airflow.models import Variable
@@ -18,12 +20,18 @@ from datetime import datetime
 # Additional
 import json
 from requests_oauthlib import OAuth2Session
+from requests.models import Response as Request_Response
 import logging
-
-
 # Defining the dag to pull data from an api and upload
 # to s3 bucket
-def _get_strava_data(**_):
+def _get_strava_data(**_) -> Request_Response:
+    """
+    Download data from strava api and return data
+
+    Returns:
+        respose(str): a request response object
+    """
+
     client_id = Variable.get("STRAVA_CLIENT")
     client_secret = Variable.get("STRAVA_CLIENT_SECRET")
     token_url = "https://www.strava.com/oauth/token"
@@ -65,7 +73,15 @@ def _get_strava_data(**_):
     return response
 
 
-def _download_strava_to_s3(ts):
+def _download_strava_to_s3(ts) -> str:
+    """
+    Store obtained response object into an s3 bucket
+    Args:
+        ts (str): time stamp to be used as key for S3 file
+
+    Returns:
+        key: S3 key pointing to file 
+    """
     response = _get_strava_data()
     data = response.json()
     bucket_name = 'lifedata'
@@ -84,6 +100,13 @@ def _download_strava_to_s3(ts):
 # Defining DAG to pull file from S3 and upload to
 # PostgresDB
 class StravaActivityCreate(BaseModel):
+    """
+    Pydantic class used for data validation.
+    Used to validate SQL inserts into Strava Table
+
+    Args:
+        BaseModel (BaseModel): Standard pydantic Base Model
+    """
     name: str
     type: str
     start_date: datetime
@@ -98,13 +121,28 @@ class StravaActivityCreate(BaseModel):
 
 
 class StravaActivity(StravaActivityCreate):
+    """
+    Pydantic class used for data validation.
+    Inherits from StravaActivityCreate but allows for setting
+    id value.
+    Set to work in orm_mode
+
+    Args:
+        StravaActivityCreate (BaseModel): Pydantic class
+    """
     id: int
 
     class Config:
         orm_mode = True
 
 
-def _upload_s3_to_db(key_name: str):
+def _upload_s3_to_db(key_name: str) -> None:
+    """
+    Function to download a json file from S3 and upload to PostgresDB
+
+    Args:
+        key_name (str): key pointer to S3 File in a bucket
+    """
     key = key_name
 
     s3_hook = S3Hook(aws_conn_id='docker-minio')
@@ -121,7 +159,13 @@ def _upload_s3_to_db(key_name: str):
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
     @contextmanager
-    def get_db():
+    def get_db() -> None:
+        """
+        Utility function to handle db session
+
+        Yields:
+            db: postgres session
+        """
         db = SessionLocal()
         try:
             yield db
@@ -149,15 +193,29 @@ def _upload_s3_to_db(key_name: str):
     schedule_interval="@hourly",
     max_active_runs=1)
 def strava_data_pipeline():
+    """
+    DAG definition for Strava API download and storage into Postgres 
+    """
     @task()
-    def get_data_from_strava():
+    def get_data_from_strava() -> str:
+        """
+        Utility method for task definition
+        context is used for naming conventions and must be declared in function
+        definition.
+        """
         context = get_current_context()
         ts_nodash = context['ts_nodash']
         key = _download_strava_to_s3(ts_nodash)
         return key
 
     @task()
-    def upload_s3_data_to_db(key: str):
+    def upload_s3_data_to_db(key: str) -> None:
+        """
+        Convinience wrapper for task definition
+
+        Args:
+            key (str): Key string for S3 file
+        """
         _upload_s3_to_db(key)
 
     key_id = get_data_from_strava()

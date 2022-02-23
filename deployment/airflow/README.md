@@ -435,10 +435,10 @@ strava_task_dag = strava_data_pipeline()
 
 If we log into our Airflow Dashboard we will see our new dag (which we saved into our dag folder).
 
-![airflow-strava-dag](/imgs/strava_dag.PNG)
+![airflow-strava-dag](imgs/strava_dag.PNG)
 
 We can trigger our dag to see if it works. We will see both tasks status.
 
-![dag-result](/imgs/dag_result.PNG)
+![dag-result](imgs/dag_result.PNG)
 
 The whole setup can be accessed on my [github](https://github.com/frodrig3ND/DailyDashV2/tree/master/deployment)

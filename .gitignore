@@ -149,3 +149,5 @@ garbage
 colum_sizes.csv
 cli.py
 *.service
+
+/client/public/wdc/

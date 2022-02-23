@@ -81,7 +81,7 @@
 
             // Download the data
             myConnector.getData = function (table, doneCallback) {
-                $.getJSON("http://rasp-srv:8000/strava", function (resp) {
+                $.getJSON("http://localhost:8000/strava", function (resp) {
                     var feat = resp,
                         tableData = [];
 
